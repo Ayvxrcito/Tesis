@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envolplastic - Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d8ff;
+            --secondary: #ff3e83;
+            --accent: #40b3ff;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--light);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .navbar {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: var(--light);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .hero-section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 216, 255, 0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 216, 255, 0.2);
+        }
+        
+        .card-title {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .card-text {
+            color: var(--light);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-section, .products-section, .mission-section {
+            padding: 100px 0;
+        }
+        
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 50px 0 20px;
+        }
+        
+        .social-icons a {
+            color: var(--light);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient);
+        }
+        
+        .product-card {
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        
+        .contact-form .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 216, 255, 0.25);
+            color: var(--light);
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 300px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ENVOLPLASTIC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center hero-content">
+                    <h1 class="hero-title">Nuestros Productos</h1>
+                    <p class="hero-subtitle">Calidad y variedad en soluciones de empaque plástico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="products-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="bolsas">Bolsas</button>
+                <button class="filter-btn" data-filter="mangas">Mangas</button>
+                <button class="filter-btn" data-filter="laminas">Láminas</button>
+            </div>
+            
+            <div class="row" id="product-grid">
+                <div class="col-md-4 product-card" data-category="bolsas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Bolsas Virgen Cristal">
+                        <div class="card-body">
+                            <h3 class="card-title">Bolsas Virgen Cristal</h3>
+                            <p class="card-text">Bolsas transparentes de alta calidad, ideales para empaque de alimentos y productos que requieren visibilidad.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Disponible en múltiples medidas</li>
+                                <li class="list-group-item bg-transparent text-light">Resistente y duradero</li>
+                                <li class="list-group-item bg-transparent text-light">Certificado de inocuidad alimentaria</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 product-card" data-category="bolsas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1581497396154-ea47741b5bd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Bolsas Termocontraíbles">
+                        <div class="card-body">
+                            <h3 class="card-title">Bolsas Termocontraíbles</h3>
+                            <p class="card-text">Bolsas que se ajustan perfectamente al producto mediante aplicación de calor, proporcionando un empaque seguro y atractivo.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Protección contra humedad y polvo</li>
+                                <li class="list-group-item bg-transparent text-light">Ideal para agrupación de productos</li>
+                                <li class="list-group-item bg-transparent text-light">Excelente presentación visual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 product-card" data-category="mangas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1620749330995-0ec1e6b6ed02?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Mangas Baja Densidad">
+                        <div class="card-body">
+                            <h3 class="card-title">Mangas Baja Densidad Cristal</h3>
+                            <p class="card-text">Mangas de polietileno de baja densidad, flexibles y resistentes, perfectas para una variedad de aplicaciones industriales.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Alta flexibilidad y resistencia al impacto</li>
+                                <li class="list-group-item bg-transparent text-light">Transparencia óptima</li>
+                                <li class="list-group-item bg-transparent text-light">Excelente sellabilidad</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 product-card" data-category="mangas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Mangas de Colores">
+                        <div class="card-body">
+                            <h3 class="card-title">Mangas de Colores</h3>
+                            <p class="card-text">Mangas en diversos colores para identificación de productos, protección contra la luz y diferenciación de marcas.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Variedad de colores disponibles</li>
+                                <li class="list-group-item bg-transparent text-light">Protección UV para productos sensibles</li>
+                                <li class="list-group-item bg-transparent text-light">Personalización según requerimiento</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 product-card" data-category="laminas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-158167332222-4c2662c15689?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Láminas Termocontraíbles">
+                        <div class="card-body">
+                            <h3 class="card-title">Láminas Termocontraíbles</h3>
+                            <p class="card-text">Láminas plásticas que se contraen con calor para formar un empaque ajustado, ideal para paletizado y protección de mercancías.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Protección contra humedad y polvo</li>
+                                <li class="list-group-item bg-transparent text-light">Estabilización de carga en palets</li>
+                                <li class="list-group-item bg-transparent text-light">Diferentes espesores disponibles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 product-card" data-category="laminas">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top product-img" alt="Láminas Cristal">
+                        <div class="card-body">
+                            <h3 class="card-title">Láminas Cristal</h3>
+                            <p class="card-text">Láminas transparentes de alta calidad para protección de superficies, embalaje y diversas aplicaciones industriales.</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light">Alta transparencia y brillo</li>
+                                <li class="list-group-item bg-transparent text-light">Resistencia al rasgado y perforación</li>
+                                <li class="list-group-item bg-transparent text-light">Protección contra rayaduras</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <a href="https://wa.me/51946547854?text=Hola,%20estoy%20interesado%20en%20sus%20productos" class="whatsapp-bubble" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="text-primary">ENVOLPLASTIC</h3>
+                    <p>Fabricación y venta de productos plásticos de la más alta calidad.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-primary">Contacto</h5>
+                    <p><i class="fas fa-phone me-2"></i> 946 547 854 / 969 348 388</p>
+                    <p><i class="fas fa-envelope me-2"></i> dlacruz.am@gmail.com</p>
+                    <p><i class="fas fa-envelope me-2"></i> envolplastic@gmail.com</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-primary">Dirección</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Otr. Antigua Panamericana Sur Km. 17.4 Mza. C Lote. 3 - Villa El Salvador</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <div class="social-icons mb-4">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <p>&copy; 2025 Envolplastic. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00d8ff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#00d8ff",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+            
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '10px 0';
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                } else {
+                    navbar.style.padding = '15px 0';
+                    navbar.style.background = 'rgba(15, 23, 42, 0.9)';
+                }
+            });
+            
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                   
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    productCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
